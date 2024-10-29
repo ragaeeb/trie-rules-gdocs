@@ -1,0 +1,43 @@
+{
+    "name": "trie-rules-gdocs",
+    "version": "1.0.0",
+    "description": "Applies trie-rules to a Google Doc.",
+    "source": "src/index.ts",
+    "main": "dist/main.js",
+    "type": "module",
+    "scripts": {
+        "start": "bun run src/index.ts",
+        "build": "NODE_ENV=production bun build src/index.ts --outdir dist --target node --packages=external",
+        "compile": "NODE_ENV=production bun build src/index.ts --target node --compile --outfile dist/substract-cli"
+    },
+    "keywords": [
+        "trie-rules",
+        "docs"
+    ],
+    "author": "Ragaeeb Haq",
+    "license": "MIT",
+    "dependencies": {
+        "bitaboom": "^1.0.0",
+        "google-auth-library": "^9.14.2",
+        "googleapis": "^144.0.0",
+        "log-symbols": "^7.0.0",
+        "picocolors": "^1.1.1",
+        "pino": "^9.5.0",
+        "pino-pretty": "^11.3.0",
+        "trie-rules": "^2.0.2"
+    },
+    "devDependencies": {
+        "@eslint/js": "^9.13.0",
+        "@semantic-release/changelog": "^6.0.3",
+        "@types/eslint__js": "^8.42.3",
+        "@types/node": "^22.8.1",
+        "eslint": "^9.13.0",
+        "eslint-config-prettier": "^9.1.0",
+        "eslint-plugin-import": "^2.31.0",
+        "eslint-plugin-perfectionist": "^3.9.1",
+        "eslint-plugin-prettier": "^5.2.1",
+        "prettier": "^3.3.3",
+        "semantic-release": "^24.2.0",
+        "typescript-eslint": "^8.12.0"
+    }
+}
