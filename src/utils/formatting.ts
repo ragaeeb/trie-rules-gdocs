@@ -2,20 +2,11 @@ import { normalizeArabicPrefixesToAl, normalizeDoubleApostrophes, replaceSalutat
 import picocolors from 'picocolors';
 import { searchAndReplace, TrieNode } from 'trie-rules';
 
+import { Change } from '../types';
 import logger from './logger';
 
-export type Changes = {
-    replaceAllText: {
-        containsText: {
-            matchCase: boolean;
-            text: string;
-        };
-        replaceText: string;
-    };
-};
-
-export const formatParagraphBody = (element: any, trie: TrieNode): Changes[] => {
-    const changes: Changes[] = [];
+export const formatParagraphBody = (element: any, trie: TrieNode): Change[] => {
+    const changes: Change[] = [];
 
     if (element.paragraph) {
         let paragraphText = '';
