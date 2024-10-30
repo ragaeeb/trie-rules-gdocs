@@ -19,12 +19,12 @@ export const formatParagraphBody = (element: any, trie: TrieNode): Change[] => {
         for (const el of element.paragraph.elements) {
             const textRun = el.textRun;
 
-            if (textRun && textRun.textStyle && textRun.textStyle.link) {
+            if (textRun?.textStyle?.link) {
                 logger.warn(`Skipping link: ${textRun.content}`);
                 continue;
             }
 
-            if (textRun && textRun.content) {
+            if (textRun?.content) {
                 paragraphText += textRun.content;
             }
         }

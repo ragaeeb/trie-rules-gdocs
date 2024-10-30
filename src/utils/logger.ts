@@ -23,6 +23,7 @@ if (process.env.NODE_ENV === 'test') {
         fatal: console.error,
         info: console.info,
         level: 'debug',
+        trace: (() => {}) as any,
         warn: console.warn,
     } as Logger;
 }
