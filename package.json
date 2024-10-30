@@ -7,7 +7,7 @@
     "type": "module",
     "scripts": {
         "start": "bun run src/index.ts",
-        "test": "bun test"
+        "test": "bun test --coverage"
     },
     "keywords": [
         "trie-rules",
