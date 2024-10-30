@@ -1,4 +1,9 @@
-import { normalizeArabicPrefixesToAl, normalizeDoubleApostrophes, replaceSalutationsWithSymbol } from 'bitaboom';
+import {
+    normalizeApostrophes,
+    normalizeArabicPrefixesToAl,
+    normalizeDoubleApostrophes,
+    replaceSalutationsWithSymbol,
+} from 'bitaboom';
 import picocolors from 'picocolors';
 import { searchAndReplace, TrieNode } from 'trie-rules';
 
@@ -24,9 +29,16 @@ export const formatParagraphBody = (element: any, trie: TrieNode): Change[] => {
             }
         }
 
-        const modifiedText = normalizeDoubleApostrophes(
-            normalizeArabicPrefixesToAl(searchAndReplace(trie, replaceSalutationsWithSymbol(paragraphText))),
-        );
+        const searchAndReplaceWithTrie = (text: string) => searchAndReplace(trie, text);
+
+        const modifiedText = [
+            normalizeApostrophes,
+            replaceSalutationsWithSymbol,
+            searchAndReplaceWithTrie,
+            normalizeArabicPrefixesToAl,
+            searchAndReplaceWithTrie, // doing this a second time to correct apostrophes
+            normalizeDoubleApostrophes,
+        ].reduce((text, formatter) => formatter(text), paragraphText);
 
         if (modifiedText.trim() !== paragraphText.trim()) {
             logger.trace(`${picocolors.dim(paragraphText)} -> ${picocolors.italic(modifiedText)}`);

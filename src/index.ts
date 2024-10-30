@@ -45,7 +45,9 @@ const formatDocument = async (documentId: string, { saveChanges = true } = {}) =
     try {
         const [trie, authClient] = await Promise.all([getTrie(process.env.API_PATH_RULES as string), authorize()]);
         const docs: docs_v1.Docs = google.docs({ auth: authClient, version: 'v1' });
+        const now = Date.now();
         const changes = await applyFormattingToDocument(documentId, docs, trie);
+        logger.info(`Formatting took: ${(Date.now() - now) / 1000} seconds`);
         await saveChangesToDoc(documentId, docs, saveChanges ? changes : []);
     } catch (err) {
         logger.error(err);
