@@ -28,8 +28,9 @@ export const formatParagraphBody = (element: any, trie: TrieNode): Change[] => {
             normalizeArabicPrefixesToAl(searchAndReplace(trie, replaceSalutationsWithSymbol(paragraphText))),
         );
 
-        if (modifiedText !== paragraphText) {
-            logger.debug(`${picocolors.dim(paragraphText)} -> ${picocolors.italic(modifiedText)}`);
+        if (modifiedText.trim() !== paragraphText.trim()) {
+            logger.trace(`${picocolors.dim(paragraphText)} -> ${picocolors.italic(modifiedText)}`);
+
             changes.push({
                 replaceAllText: {
                     containsText: { matchCase: true, text: paragraphText },

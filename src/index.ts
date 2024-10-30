@@ -20,16 +20,11 @@ const applyFormattingToDocument = async (documentId: string, docs: docs_v1.Docs,
         requests.push(...formatParagraphBody(element, trie));
     });
 
-    const footerCount = document.data.footnotes ? Object.keys(document.data.footnotes).length : 0;
-
-    for (let i = 0; i < footerCount; i++) {
-        const footerId = Object.keys(document.data.footnotes || {})[i];
-        const footnote = (document.data.footnotes || {})[footerId];
-
+    Object.entries(document.data.footnotes || {}).forEach(([, footnote]) => {
         footnote?.content?.forEach((element: any) => {
             requests.push(...formatParagraphBody(element, trie));
         });
-    }
+    });
 
     return requests;
 };
@@ -57,4 +52,4 @@ const formatDocument = async (documentId: string, { saveChanges = true } = {}) =
     }
 };
 
-formatDocument(process.env.DOCUMENT_ID as string, { saveChanges: false });
+formatDocument(process.env.DOCUMENT_ID as string, { saveChanges: true });
